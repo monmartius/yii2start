@@ -13,7 +13,18 @@ class m191031_101451_create_category_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%category}}', [
-            'id' => $this->primaryKey(),
+
+            'id' => $this->integer(10)->primaryKey(),
+
+            'parent_id' => $this->integer(10)-> unsigned()->notNull()->defaultValue(0),
+
+            'name' => $this->text(255)->notNull(),
+
+            'keywords' => $this->text(255)->defaultValue(null),
+
+            'description' => $this->text(255)->defaultValue(null),
+
+
         ]);
     }
 
