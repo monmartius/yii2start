@@ -13,26 +13,11 @@ class m191101_094253_create_product_table extends Migration
     public function safeUp()
     {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         $this->createTable('{{%product}}', [
 
-            'id' => $this->integer(10)->primaryKey(),
+            'id' => $this->integer(10),
 
-            'category_id' => $this->integer(10)->unsigned()->notNull(),
+            'category_id' => $this->integer(10)->unsigned()->notNull()->defaultValue(0),
 
             'name' => $this->text(255)->notNull(),
 
@@ -44,7 +29,7 @@ class m191101_094253_create_product_table extends Migration
 
             'description' => $this->text(255)->defaultValue(null),
 
-            'img' => $this->text(255)->defaultValue('no-image.png'),
+              'img' => $this->text(255)->defaultValue('no-image.png'),
 
             'hit' => $this->text()->defaultValue('0'),
 
@@ -53,6 +38,12 @@ class m191101_094253_create_product_table extends Migration
             'sale' => $this->text()->defaultValue('0'),
 
         ]);
+
+        $this->addPrimaryKey('productId', 'product', 'id');
+
+        $this->addForeignKey('categoryId', 'product', 'category_id', 'category', 'id');
+
+        echo print_r($this);
     }
 
     /**

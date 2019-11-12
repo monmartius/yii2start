@@ -14,7 +14,7 @@ class m191031_101451_create_category_table extends Migration
     {
         $this->createTable('{{%category}}', [
 
-            'id' => $this->integer(10)->primaryKey(),
+            'id' => $this->integer(10),
 
             'parent_id' => $this->integer(10)-> unsigned()->notNull()->defaultValue(0),
 
@@ -26,6 +26,12 @@ class m191031_101451_create_category_table extends Migration
 
 
         ]);
+
+//        $this->addPrimaryKey('categotyId', 'category', 'id');
+
+        echo print_r($this);
+
+
     }
 
     /**
