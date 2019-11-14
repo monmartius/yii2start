@@ -988,27 +988,10 @@
 </div>
 
 <script>
-			
-function getString(length){
-
-
-}
-
-function randomRange(){
-
-}
-
 
 div = document.getElementsByTagName('div')[0];
 
 textArray = div.innerHTML.split("\n");
-
-for (var i = textArray.length - 1; i >= 0; i--) {
-
-}
-
-	console.log(Math.round(1.5));
-
 
 function random(n){
 
@@ -1017,8 +1000,6 @@ function random(n){
 
 
 function randomWord() {
-	
-	
 
 	return textArray[Math.round(Math.random() * (textArray.length - 1))];
 }
@@ -1039,20 +1020,14 @@ function getLine(length){
 		word = randomWord();
 	}
 
-	// if(line.trim() === ""){
-
-	// 	alert(i + ">" + line + "<" + length);
-	// }
-
 	return line.trim();
 }
 
-function column(str){
+function column(str, lastColumn){
 
-	return '"' + str + '"';
+	return '"' + str + (!lastColumn ? '",' : '"\n');
 }
 
-comma = ",";
 
 row = [];
 
@@ -1068,23 +1043,23 @@ for (var i = 0; i <= 100; i++) {
 	price = "" + random(30) + "." + random(9) + random(9) + "00";
 	keywords = getLine(random(100));
 	description = getLine(random(150));
-	img = 'image' + i + '.png';
+	img = 'image' + "0".repeat(4 - i.toString().length) + i  + '.png';
 	hit = 0;
 	_new = 0;
 	sale = 0;
 
 	row.push( 
-		column(id) + comma + 
-		column(category_id) + comma + 
-		column(name) + comma + 
-		column(content) + comma + 
-		column(price) + comma + 
-		column(keywords) + comma + 
-		column(description) + comma + 
-		column(img) + comma + 
-		column(hit) + comma + 
-		column(_new) + comma + 
-		column(sale) +  "\n"
+		column(id) +
+		column(category_id) +
+		column(name) +
+		column(content) +
+		column(price) +
+		column(keywords) +
+		column(description) +
+		column(img) +
+		column(hit) +
+		column(_new) +
+		column(sale, true)
 		);
 
 	res += row[i];
@@ -1092,12 +1067,6 @@ for (var i = 0; i <= 100; i++) {
 	console.log(row[i]);
 
 }
-
-
-
-
-
-
 
 div.innerHTML = '<pre>' + res + '</pre>';
 
