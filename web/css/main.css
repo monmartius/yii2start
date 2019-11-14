@@ -706,6 +706,17 @@ h2.title:before{
 	margin-left: -110px;
 }
 
+ul.category-products{
+  padding-left: 10px;
+}
+
+ul.category-products ul{
+  padding-left: 10px;
+}
+ul.category-products li{
+  padding-left: 10px;
+}
+
 .category-products .panel {
 	background-color: #FFFFFF;
 	border: 0px;

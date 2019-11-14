@@ -82,7 +82,7 @@ use app\components\MenuWidget; ?>
                 <div class="left-sidebar">
                     <h2>Category</h2>
 
-<ul class="catalog">
+<ul class="catalog category-products">
                     <?php
                        echo \app\components\MenuWidget::widget(['tpl' => 'menu'])
                     ?>
