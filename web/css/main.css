@@ -2532,3 +2532,6 @@ h2.title {
 }
 
 
+.view-product img {
+  height: auto;
+}

@@ -7,10 +7,11 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\LtAppAsset;
-
+use yii\bootstrap\Modal;
 AppAsset::register($this);
 LtAppAsset::register($this);
 ?>
@@ -63,7 +64,9 @@ LtAppAsset::register($this);
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="/images/home/logo.png" alt="" /></a>
+                        <a href="<?= Url::home()?>">
+                            <?= Html::img('@web/images/home/logo.png')?>
+                        </a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -95,7 +98,7 @@ LtAppAsset::register($this);
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="/cart/show" id = "cartLink"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                         </ul>
                     </div>
@@ -141,10 +144,11 @@ LtAppAsset::register($this);
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search"/>
+                        <form action="<?= Url::to(['category/search']) ?>">
+                            <input type="text" placeholder="Search" name = 'q'/>
+                        </form>
                     </div>
-                </div>
-            </div>
+                </div>            </div>
         </div>
     </div><!--/header-bottom-->
 </header><!--/header-->
@@ -306,9 +310,23 @@ LtAppAsset::register($this);
     </div>
 
 </footer><!--/Footer-->
+<?php
+    Modal::begin([
+        'header' => '<h2>Ваша корзина</h2>',
+        'id' => 'cart',
+        'size' => 'modal-lg',
+        'footer' => '
+<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+<button type="button" class="btn btn-success">Оформить заказ</button>
+<button type="button" class="btn btn-danger clear-cart">Очистить корзину</button>
+'
+    ]);
 
+        echo 'Say hello...';
 
+    Modal::end();
 
+?>
 
 <?php $this->endBody() ?>
 </body>

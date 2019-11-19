@@ -26,12 +26,21 @@ class m191111_191053_create_category_table extends Migration
 // description -> varchar(255) -> default null
 
         $this->createTable('{{%category}}', [
-            'id' => $this->primaryKey(10),
+            'id' => $this->primaryKey(10)->notNull(),
             'parent_id' => $this->integer(10)->unsigned()->notNull()->defaultValue(0),
             'name' => $this->string(255)->notNull(),
             'keywords' => $this->string(255)->defaultValue(null),
             'description' => $this->string()->defaultValue(null)
         ]);
+
+        $this->createIndex(
+            'IDX_category_parent_id',
+            '{{%category}}',
+            'parent_id'
+        );
+
+//        echo print_r($this, true);
+//        die();
 
 //        $this->createIndex('parent-id-idx', '{{%category'}}, )
     }
@@ -42,5 +51,6 @@ class m191111_191053_create_category_table extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%category}}');
+
     }
 }

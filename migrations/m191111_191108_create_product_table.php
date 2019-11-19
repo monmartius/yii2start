@@ -24,8 +24,8 @@ class m191111_191108_create_product_table extends Migration
         //hit => $this->append('enum("0", "1")' . 'NOT NULL ' . 'DEFAULT 0')
 
         $this->createTable('{{%product}}', [
-            'id' => $this->primaryKey(10),
-            'category_id' => $this->integer(10)->unsigned()->notNull(),
+            'id' => $this->primaryKey(10)->notNull(),
+            'category_id' => $this->integer(10)->notNull(),
             'name' => $this->string(255)->notNull(),
             'content' => $this->text()->defaultValue(null),
             'price' => $this->money()->notNull()->defaultValue(0),
@@ -36,6 +36,21 @@ class m191111_191108_create_product_table extends Migration
             'new' => 'enum("0", "1")' . 'NOT NULL ' . 'DEFAULT "0"',
             'sale' => 'enum("0", "1")' . 'NOT NULL ' . 'DEFAULT "0"',
         ]);
+        $this->createIndex(
+            'IDX_product_category_id',
+            '{{%product}}',
+            'category_id'
+        );
+        $this->addForeignKey(
+            'FK_product_category_id',
+            '{{%product}}',
+            'category_id',
+            '{{%category}}',
+            'id'
+        );
+//        echo print_r($this, true);
+//        die();
+
 
     }
 

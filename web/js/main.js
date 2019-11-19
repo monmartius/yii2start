@@ -1,16 +1,179 @@
 /*price range*/
 
  $('#sl2').slider();
+// console.log(id);
+
+
 $('.catalog').dcAccordion({
 	speed: 300
 });
+
+
+$('.cart-view').on('click', '[data-cart-delete-item]', function(){
+
+	var id = $(this).data('cart-delete-item');
+
+	alert();
+
+	$.ajax({
+		url: '/cart/delete',
+		type: 'GET',
+		data: {
+			id: id
+		},
+		success: function (res) {
+			// showCart('res');
+			location.reload();
+			// alert("asdfsadf");
+			// // attachCartDeleteEvent();
+			// alert("teyeyeryey");
+		},
+		error: function (res) {
+			console.log(res.responseText);
+		}
+	});
+});
+
+
+function showCart(cart){
+	$('#cart .modal-body').html(cart);
+	$('#cart').modal();
+}
+
+
+// $('#cart .modal-body').on('click', '[data-cart-delete-item]', function(){
+$('#cart .modal-body').on('click', '[data-cart-delete-item]', function(){
+
+	var id = $(this).data('cart-delete-item');
+
+	alert();
+
+	$.ajax({
+		url: '/cart/delete',
+		type: 'GET',
+		data: {
+			id: id
+		},
+		success: function (res) {
+			// showCart('res');
+			showCart(res);
+			// alert("asdfsadf");
+			// // attachCartDeleteEvent();
+			// alert("teyeyeryey");
+		},
+		error: function (res) {
+			console.log(res.responseText);
+		}
+	});
+});
+
+
+
+$('#cartLink').on('click', function(e){
+
+	e.preventDefault();
+
+	$('this').css('display', 'none');
+
+	alert();
+
+	$.ajax({
+		url: '/cart/show',
+		type: 'GET',
+		success: function(res){
+			showCart(res);
+		},
+		error: function(res){
+			console.log(res.responseText);
+		}
+	})
+});
+
+
+$('.clear-cart').on('click', function(){
+
+	$.ajax({
+		url: '/cart/clear',
+		type: 'GET',
+		success: function (res) {
+			showCart(res);
+		},
+		error: function (res) {
+			console.log(res.responseText);
+		}
+	});
+});
+
+
+$('.btn-add-to-cart').on('click', function (e){
+
+	e.preventDefault(e);
+	form = $(this).parent('form');
+	var id = form.find('.product_id').val();
+	var qty = form.find('.qty').val();
+
+	alert(qty);
+
+	$.ajax({
+		url: '/cart/add',
+		data: {
+			id: id,
+			qty: qty
+		},
+		type: 'GET',
+		success: function(res){
+			// t.style.backgroundColor = 'red';
+			if(!res) alert("Ошибка!");
+
+			console.log(id);
+			console.log(res);
+			showCart(res);
+		},
+		error: function(res){
+			console.log(res.responseText);
+		}
+	});
+
+});
+
+
+$('.add-to-cart').on('click', function(e){
+
+	e.preventDefault();
+	var id = $(this).data('id');
+
+	t = this;
+
+	$.ajax({
+		url: '/cart/add',
+		data: {id: id},
+		type: 'GET',
+		success: function(res){
+			t.style.backgroundColor = 'red';
+			// if(!res) alert("Ошибка!");
+
+			console.log(id);
+			console.log(res);
+			showCart(res);
+		},
+		error: function(res){
+			console.log(res.responseText);
+		}
+	})
+});
+
+
+
 	var RGBChange = function() {
-	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
-	};	
-		
+
+		$('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
+
+	};
 /*scroll to top*/
 
+
 $(document).ready(function(){
+
 	$(function () {
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
@@ -28,5 +191,6 @@ $(document).ready(function(){
 	        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
 	        zIndex: 2147483647 // Z-Index for the overlay
 		});
+
 	});
 });

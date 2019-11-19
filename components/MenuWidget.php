@@ -34,6 +34,9 @@ class MenuWidget extends Widget
         $this->tree = $this->getTree();
         $this->menuHtml = $this->getMenuHtml($this->tree);
 
+        $this->menuHtml = '<ul class="catalog category-products">' .
+                        $this->menuHtml . '</ul>';
+
         Yii::$app->cache->set('menu', $this->menuHtml, 60);
 
         return $this->menuHtml;
@@ -52,6 +55,14 @@ class MenuWidget extends Widget
             }
         }
 
+//        $tree[] = [
+//            'id' => 1000,
+//            'parent_id' => 0,
+//            'name' => 'ALL GOODS',
+//            'keywords' => 'ALL GOODS keywords',
+//            'description' => 'Description ALL GOODS'
+//            ];
+//        debugd($tree);
         return $tree;
     }
 
