@@ -18,7 +18,7 @@ class CategoryController extends AppController
         //        die();
         $hits = Product::find()->where(['hit' => '1'])->limit(6)->all();
         $this->setMeta("E-SHOPPER");
-//        debugf($hits, "/___________hits.log");
+        debugf($hits, "hits.log");
 
         return $this->render('index', compact('hits'));
     }

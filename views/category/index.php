@@ -265,6 +265,8 @@ use yii\helpers\Url; ?>
                     </div>
                     <?php endforeach; ?>
                 </div><!--features_items-->
+<?php else: ?>
+
 <?php endif; ?>
 
                 <div class="category-tab"><!--category-tab-->

@@ -12,11 +12,11 @@ function debug($obj, $returnString = false){
     }
 }
 
-function debugf($obj, $fname = "D:/projects/yii2start/runtime/logs/debugf.log"){
+function debugf($obj, $fname = "../runtime/logs/debugf.log"){
 
-    if($fname != "D:/projects/yii2start/runtime/logs/debugf.log"){
+    if($fname != "../runtime/logs/debugf.log"){
 
-        $fname =  "D:/projects/yii2start/runtime/logs/" . $fname ;
+        $fname =  "../runtime/logs/" . $fname ;
     }
 
     $out = "<pre>" . print_r($obj, true) . "</pre>";
